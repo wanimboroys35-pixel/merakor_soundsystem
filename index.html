@@ -599,25 +599,120 @@ color:var(--white);
 cursor:pointer;
 }
 
-/* Responsive */
-@media(max-width:1024px){
+/* Responsive - Mobile First */
+@media(max-width:1200px){
 .about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
 .pricing-card.featured{transform:scale(1)}
-.footer-grid{grid-template-columns:1fr 1fr}
+.footer-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:992px){
+.services-grid,.pricing-grid,.testimonial-grid{grid-template-columns:1fr}
 }
 @media(max-width:768px){
-.premium-navbar{padding:15px 0}
-.floating-logo{left:20px;top:10px}
-.floating-logo img{width:45px;height:45px}
-.floating-logo .logo-text{font-size:14px}
-.floating-logo span{font-size:8px}
-.hero-title{font-size:36px}
-.stats{gap:40px}
-.stat-number{font-size:36px}
-.section{padding:80px 20px}
-.gallery-grid{grid-template-columns:1fr}
-.about-grid{grid-template-columns:1fr}
+/* Reset for mobile - prevent horizontal overflow */
+html,body{
+overflow-x:hidden;
+max-width:100vw;
+}
+.premium-navbar{padding:12px 0}
+.premium-navbar .container{
+padding:0 15px;
+}
+/* Fix floating logo - center on mobile */
+.floating-logo{
+left:50% !important;
+transform:translateX(-50%);
+top:8px !important;
+display:flex;
+align-items:center;
+gap:10px;
+}
+.floating-logo img{width:40px;height:40px}
+.floating-logo .logo-text{font-size:13px}
+.floating-logo span{font-size:7px}
+/* Hide floating logo text on very small screens */
+@media(max-width:400px){
+.floating-logo .logo-text span{display:none}
+.floating-logo img{width:35px;height:35px}
+}
+/* Hero section mobile */
+.hero-title{font-size:28px;line-height:1.3}
+.hero-subtitle{font-size:14px}
+.hero-desc{font-size:13px;padding:0 10px}
+.hero-badge{font-size:10px;padding:6px 15px}
+.hero-buttons{flex-direction:column;padding:0 20px}
+.hero-buttons .btn-gold,.hero-buttons .btn-outline{
+width:100%;
+justify-content:center;
+text-align:center;
+}
+/* Stats - horizontal scroll on mobile if needed */
+.stats{gap:30px;flex-wrap:wrap;margin-top:30px}
+.stat-number{font-size:28px}
+.stat-label{font-size:11px}
+/* Sections */
+section{padding:60px 15px}
+.section-title{font-size:24px}
+.section-desc{font-size:13px;padding:0 10px}
+.section-tag{font-size:10px;padding:6px 12px}
+/* About */
+.about-image{margin-bottom:30px}
 .about-image::before{display:none}
+.about-content{text-align:center}
+.about-content .section-title{text-align:center}
+.about-feature{justify-content:center;text-align:left}
+/* Services */
+.service-card{padding:25px}
+.service-icon{width:55px;height:55px}
+.service-icon i{font-size:26px}
+.service-card h3{font-size:18px}
+/* Gallery */
+.gallery-grid{grid-template-columns:1fr;gap:15px}
+.gallery-item{aspect-ratio:4/3}
+/* Pricing */
+.pricing-card{padding:25px}
+.pricing-card .price{font-size:36px}
+/* Contact */
+.contact-grid{grid-template-columns:1fr;gap:30px}
+.contact-form{padding:25px}
+/* Footer */
+.footer-grid{grid-template-columns:1fr;gap:30px;text-align:center}
+.social-links{justify-content:center}
+.footer-brand .logo{justify-content:center}
+.footer-col ul{text-align:center}
+/* Navbar mobile */
+.navbar-collapse{
+background:rgba(10,10,10,.98);
+padding:20px;
+margin-top:10px;
+border-radius:10px;
+}
+.nav-link{margin:10px 0;text-align:center}
+/* Touch improvements */
+a,button{
+min-height:44px;
+min-width:44px;
+}
+/* Form inputs mobile */
+.form-group input,.form-group textarea{
+padding:12px 15px;
+font-size:16px; /* Prevents zoom on iOS */
+}
+}
+@media(max-width:480px){
+.hero-title{font-size:24px}
+.stat-number{font-size:24px}
+.stats{gap:20px}
+.section{padding:50px 12px}
+.service-card{padding:20px}
+.pricing-card{padding:20px}
+.contact-form{padding:20px}
+}
+/* Very small screens */
+@media(max-width:360px){
+.hero-title{font-size:22px}
+.floating-logo{top:5px !important}
+.floating-logo img{width:32px;height:32px}
 }
 </style>
 </head>
@@ -1030,4 +1125,11 @@ window.open("https://wa.me/"+nomor+"?text="+encodeURI(text),"_blank");
 
 function playVideo(src){
 document.getElementById("popupVideo").src=src;
-document.getElementById("videoPopup").classList.add
+document.getElementById("videoPopup").classList.add("active");
+}
+
+function closeVideo(){
+document.getElementById("videoPopup").classList.remove("active");
+document.getElementById("popupVideo").pause();
+}
+</script>
